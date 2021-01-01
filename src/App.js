@@ -8,8 +8,6 @@ import Login from './Component/Login/Login';
 import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
 
-
-
 function App() {
   const [{ }, dispatch] = useStateValue()
 
@@ -17,7 +15,6 @@ function App() {
     //will only run once when app component loads ....
 
     auth.onAuthStateChanged(authUser => {
-      console.log("authUser ", authUser);
 
       if (authUser) {
         //user login
