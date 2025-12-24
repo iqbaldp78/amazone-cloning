@@ -3,18 +3,18 @@ import './App.css';
 import Header from './Header'
 import Home from "./Home";
 import Checkout from "./Checkout"
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Component/Login/Login';
 import { auth } from './firebase';
 import { useStateValue } from './StateProvider';
 
 function App() {
-  const [{ }, dispatch] = useStateValue()
+  const [{ user }, dispatch] = useStateValue()
 
   useEffect(() => {
     //will only run once when app component loads ....
 
-    auth.onAuthStateChanged(authUser => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => {
 
       if (authUser) {
         //user login
@@ -32,6 +32,7 @@ function App() {
         })
       }
     })
+    return () => unsubscribe()
   }, [])
 
   return (
@@ -41,12 +42,11 @@ function App() {
 
         <Switch>
           <Route path="/login">
-            <Login />
+            {user ? <Redirect to="/" /> : <Login />}
           </Route>
 
           <Route path="/checkout">
-            <Header />
-            <Checkout />
+            {!user ? <Redirect to="/login" /> : (<><Header /><Checkout /></>)}
           </Route>
 
           <Route path="/">
