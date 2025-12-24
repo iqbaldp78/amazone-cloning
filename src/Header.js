@@ -19,7 +19,7 @@ function Header() {
     return (
         <div className='header'>
             <Link to="/">
-                <img className="header__logo" src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" />
+                <img className="header__logo" src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="Amazon" />
             </Link>
             <div className="header__search">
                 <input className="header__searchInput" type="text" />
@@ -27,10 +27,10 @@ function Header() {
             </div>
 
             <div className="header__Nav">
-                <Link to={!user && '/login'} >
+                <Link to={user ? "/" : "/login"} >
                     <div onClick={handleSignOut} className="header__option" >
                         <span className="header_optionLineOne">
-                            Hello Guest
+                            Hello {user?.email || "Guest"}
                     </span>
 
                         <span className="header_optionLineTwo">

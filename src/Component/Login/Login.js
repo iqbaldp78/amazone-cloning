@@ -33,27 +33,27 @@ function Login() {
     return (
         <div className="login">
             <Link to="/">
-                <img className="login__logo" src="https://pngimg.com/uploads/amazon/amazon_PNG6.png" alt="" />
+                <img className="login__logo" src="https://pngimg.com/uploads/amazon/amazon_PNG6.png" alt="Amazon" />
             </Link>
 
             <div className="login__container">
                 <h1>Sign-in</h1>
 
-                <form>
+                <form onSubmit={signIn}>
                     <h5>E-mail</h5>
-                    <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
 
                     <h5>Password</h5>
-                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
 
-                    <button className="login__signInButton" onClick={signIn}>Sign In</button>
+                    <button className="login__signInButton" type="submit">Sign In</button>
                 </form>
 
                 <p>
                     By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.
                 </p>
 
-                <button className="login__registerButton" onClick={register}>Create your Amazon account</button>
+                <button className="login__registerButton" type="button" onClick={register}>Create your Amazon account</button>
             </div>
         </div>
     )
